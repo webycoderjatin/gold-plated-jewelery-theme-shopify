@@ -1,33 +1,140 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "name": "Index",
   "sections": {
-    "hero": { "type": "hero", "settings": {} },
-    "circles": { "type": "collection-circles", "settings": {} },
-    "shop_look": { "type": "shop-the-look", "settings": {} },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height_desktop": 680,
+        "height_mobile": 520,
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "text_alignment": "center",
+        "text_color": "light",
+        "eyebrow": "The Festive '26 Collection",
+        "heading": "The Festive '26 Collection",
+        "subheading": "",
+        "button_text": "Shop Now",
+        "button_link": "",
+        "button_style": "outline-white",
+        "button_text_secondary": "",
+        "button_link_secondary": "",
+        "button_style_secondary": "outline-white"
+      }
+    },
+    "hero_B6KBDV": {
+      "type": "hero",
+      "name": "Hero",
+      "settings": {
+        "image_desktop": "shopify://shop_images/hero-bg.png",
+        "height_desktop": 680,
+        "height_mobile": 520,
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "text_alignment": "center",
+        "text_color": "light",
+        "eyebrow": "Through the Thread of Time",
+        "heading": "The Festive '26 Collection",
+        "subheading": "",
+        "button_text": "Shop the Collection",
+        "button_link": "",
+        "button_style": "outline-white",
+        "button_text_secondary": "",
+        "button_link_secondary": "",
+        "button_style_secondary": "outline-white"
+      }
+    },
+    "circles": {
+      "type": "collection-circles",
+      "settings": {
+        "heading": ""
+      }
+    },
+    "shop_look": {
+      "type": "shop-the-look",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Shop The Look",
+        "subheading": "Curated styling, from outfit to accessories.",
+        "image": "shopify://shop_images/shop-the-look-BsI7m1Oq.png"
+      }
+    },
     "editorial_her": {
       "type": "product-grid",
       "settings": {
+        "eyebrow": "",
         "heading": "For Her: The Curated Edit",
+        "subheading": "",
         "collection": "women-jewellery",
-        "show_as_carousel": false,
+        "products_to_show": 4,
         "columns": "4",
-        "products_to_show": 4
+        "show_as_carousel": false,
+        "bg_white": false,
+        "button_text": "",
+        "button_link": ""
       }
     },
-    "brand_story": { "type": "brand-story", "settings": {} },
+    "brand_story": {
+      "type": "brand-story",
+      "settings": {
+        "heading": "Through the threads of time, we weave heritage into every piece.",
+        "text": "<p>Aura stands as a testament to the timeless elegance of South Asian craftsmanship, re-imagined for the modern aesthetic. Born from a desire to bridge heritage with contemporary luxury, each piece in our collection is a narrative of intricate artistry, passed down through generations of master artisans.</p>",
+        "show_newsletter": true,
+        "newsletter_title": "BECOME AN INSIDER",
+        "bg_white": false
+      }
+    },
     "editorial_him": {
       "type": "product-grid",
       "settings": {
+        "eyebrow": "",
         "heading": "For Him: The Curated Edit",
+        "subheading": "",
         "collection": "men",
-        "bg_white": true,
-        "show_as_carousel": false,
+        "products_to_show": 4,
         "columns": "4",
-        "products_to_show": 4
+        "show_as_carousel": false,
+        "bg_white": true,
+        "button_text": "",
+        "button_link": ""
       }
     },
-    "featured": { "type": "featured-collection", "settings": {} },
-    "reels": { "type": "social-stories", "settings": {} }
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "New Arrivals",
+        "heading": "The Facelets Edit",
+        "text": "Discover pieces designed to frame and illuminate. Intricate detailing meets modern silhouettes.",
+        "button_text": "Shop All",
+        "button_link": "",
+        "collection": "",
+        "bg_white": false
+      }
+    },
+    "reels": {
+      "type": "social-stories",
+      "settings": {
+        "heading": "Our Social Stories",
+        "bg_white": false
+      }
+    }
   },
-  "order": ["hero", "circles", "shop_look", "editorial_her", "brand_story", "editorial_him", "featured", "reels"]
+  "order": [
+    "hero",
+    "hero_B6KBDV",
+    "circles",
+    "shop_look",
+    "editorial_her",
+    "brand_story",
+    "editorial_him",
+    "featured",
+    "reels"
+  ]
 }
