@@ -1,0 +1,287 @@
+/* Gold-plated jewelry storefront visual layer */
+:root {
+  --gj-ivory: #F8F4EC;
+  --gj-cream: #EFE7D8;
+  --gj-gold: #C5A15A;
+  --gj-gold-deep: #9A7838;
+  --gj-ink: #171513;
+  --gj-muted: #766F66;
+  --gj-line: rgba(23,21,19,.12);
+}
+
+body {
+  background: var(--gj-ivory);
+  color: var(--gj-ink);
+}
+
+.header-wrapper {
+  background: rgba(248,244,236,.96);
+  border-bottom: 1px solid var(--gj-line);
+  backdrop-filter: blur(12px);
+}
+.header { height: 74px; }
+.header-logo-text {
+  letter-spacing: 3px;
+  font-size: 25px;
+}
+.nav-link {
+  font-size: 11px;
+  letter-spacing: 1.4px;
+}
+.nav-link:hover { color: var(--gj-gold-deep); }
+
+.announcement-bar {
+  background: var(--gj-ink) !important;
+  color: #F8F4EC !important;
+  padding: 8px 16px;
+  font-size: 10px;
+  letter-spacing: 1.8px;
+}
+
+/* Hero */
+.section-hero .hero {
+  position: relative;
+  overflow: hidden;
+}
+.section-hero .hero__media {
+  object-fit: cover;
+  object-position: center;
+}
+.section-hero .hero__content {
+  z-index: 2;
+}
+.section-hero .hero__inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px;
+}
+.section-hero .hero__eyebrow {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+.section-hero .hero__heading {
+  font-family: var(--font-serif);
+  font-size: clamp(42px, 6vw, 78px);
+  line-height: .98;
+  font-weight: 400;
+  letter-spacing: -1.5px;
+  text-wrap: balance;
+}
+.section-hero .hero__subheading {
+  max-width: 560px;
+  margin: 20px auto 0;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.section-hero .hero__buttons { margin-top: 28px; gap: 10px; }
+.section-hero .btn {
+  min-width: 170px;
+  padding: 14px 24px;
+}
+
+/* Category strip */
+.section-category-circles {
+  background: var(--gj-ivory);
+  padding: 54px 0 48px;
+}
+.section-category-circles .section-heading {
+  font-size: 30px;
+  margin-bottom: 28px !important;
+}
+.category-circles__track {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: center;
+  gap: clamp(22px, 4vw, 54px);
+  overflow-x: auto;
+}
+.category-circle { flex: 0 0 118px; }
+.category-circle__img-wrap {
+  border: 1px solid rgba(197,161,90,.45);
+  border-radius: 50%;
+  padding: 5px;
+  transition: transform .25s ease, border-color .25s ease;
+}
+.category-circle:hover .category-circle__img-wrap {
+  transform: translateY(-4px);
+  border-color: var(--gj-gold);
+}
+.category-circle__img {
+  width: 106px;
+  height: 106px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.category-circle__name {
+  display: block;
+  margin-top: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Product merchandising */
+.section-product-grid {
+  background: var(--gj-ivory);
+}
+.section-product-grid.section--bg-white { background: #fff; }
+.section-product-grid .editorial-section__heading-wrap {
+  margin-bottom: 34px;
+}
+.section-product-grid .section-heading { font-size: clamp(30px, 4vw, 44px); }
+.product-grid {
+  gap: 18px;
+}
+.product-card {
+  background: transparent;
+}
+.product-card__image-wrap {
+  background: #F1ECE3;
+  border-radius: 2px;
+  overflow: hidden;
+}
+.product-card__image {
+  transition: transform .45s ease;
+}
+.product-card:hover .product-card__image { transform: scale(1.035); }
+.product-card__title {
+  font-family: var(--font-serif);
+  font-size: 16px;
+}
+.product-card__price { letter-spacing: .4px; }
+
+/* Benefits strip */
+.gold-benefits {
+  background: var(--gj-ink);
+  color: #F8F4EC;
+  padding: 28px 0;
+}
+.gold-benefits__grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.gold-benefit {
+  text-align: center;
+  padding: 8px 20px;
+  border-right: 1px solid rgba(248,244,236,.16);
+}
+.gold-benefit:last-child { border-right: 0; }
+.gold-benefit__icon {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 10px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(197,161,90,.7);
+  border-radius: 50%;
+  color: #D8B86E;
+  font-size: 12px;
+}
+.gold-benefit__title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.gold-benefit__text {
+  margin-top: 5px;
+  color: rgba(248,244,236,.7);
+  font-size: 11px;
+}
+
+/* Gold-plated collections */
+.gold-collections {
+  background: var(--gj-cream);
+  padding: 78px 0;
+}
+.gold-collections__intro { text-align: center; margin-bottom: 34px; }
+.gold-collections__grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.gold-collection-card {
+  position: relative;
+  display: block;
+  min-height: 420px;
+  overflow: hidden;
+  background: #DDD4C4;
+}
+.gold-collection-card__image,
+.gold-collection-card__placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+.gold-collection-card:hover .gold-collection-card__image { transform: scale(1.04); }
+.gold-collection-card__placeholder {
+  background: linear-gradient(145deg, #E7DECF, #C8B99E);
+}
+.gold-collection-card__overlay {
+  position: absolute;
+  inset: 45% 0 0;
+  background: linear-gradient(transparent, rgba(0,0,0,.68));
+}
+.gold-collection-card__content {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 22px;
+  color: #fff;
+}
+.gold-collection-card__eyebrow {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: .78;
+}
+.gold-collection-card__title {
+  margin-top: 5px;
+  font-family: var(--font-serif);
+  font-size: 25px;
+  font-weight: 400;
+}
+
+/* Brand story */
+.section-brand-story { background: #fff; }
+.brand-story__heading { font-family: var(--font-serif); }
+
+@media (max-width: 900px) {
+  .gold-benefits__grid { grid-template-columns: repeat(2, 1fr); row-gap: 20px; }
+  .gold-benefit:nth-child(2) { border-right: 0; }
+  .gold-collections__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .header { height: 64px; }
+  .header-logo-text { font-size: 21px; letter-spacing: 2px; }
+  .section-hero .hero__heading { font-size: clamp(38px, 12vw, 58px); }
+  .section-hero .hero__subheading { font-size: 13px; }
+  .category-circles__track { justify-content: flex-start; gap: 18px; }
+  .category-circle { flex-basis: 94px; }
+  .category-circle__img { width: 84px; height: 84px; }
+  .gold-benefits__grid { grid-template-columns: 1fr 1fr; padding: 0 14px; }
+  .gold-benefit { padding: 8px 8px; }
+  .gold-benefit:nth-child(odd) { border-right: 1px solid rgba(248,244,236,.16); }
+  .gold-benefit:nth-child(even) { border-right: 0; }
+  .gold-collection-card,
+  .gold-collection-card__image,
+  .gold-collection-card__placeholder { min-height: 300px; }
+  .gold-collection-card__title { font-size: 21px; }
+}
