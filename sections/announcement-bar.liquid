@@ -1,47 +1,10 @@
 {% if section.settings.show_announcement %}
-<div class="announcement-bar" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};" data-announcement-bar>
+<div class="announcement-bar" style="background-color:{{ section.settings.bg_color }};color:{{ section.settings.text_color }};gap:clamp(30px,12vw,170px)" data-announcement-bar>
   {%- if section.blocks.size > 0 -%}
-    {%- for block in section.blocks -%}
-      <p data-announcement-item {{ block.shopify_attributes }}>
-        {%- if block.settings.link != blank -%}
-          <a href="{{ block.settings.link }}" style="color: {{ section.settings.text_color }};">{{ block.settings.text }}</a>
-        {%- else -%}
-          {{ block.settings.text }}
-        {%- endif -%}
-      </p>
-    {%- endfor -%}
-  {%- else -%}
-    <p>Premium Gold Plated Jewelry &nbsp;|&nbsp; Free Shipping on Orders ₹999+</p>
-  {%- endif -%}
+    {%- for block in section.blocks -%}<p data-announcement-item {{ block.shopify_attributes }}>{%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" style="color:{{ section.settings.text_color }}">{{ block.settings.text }}</a>{%- else -%}{{ block.settings.text }}{%- endif -%}</p>{%- endfor -%}
+  {%- else -%}<p>Free Shipping on Orders Above ₹999</p><p>Premium Gold Plated Jewellery</p><p>Designed for Everyday Elegance</p>{%- endif -%}
 </div>
 {% endif %}
-
 {% schema %}
-{
-  "name": "Announcement Bar",
-  "class": "section-announcement-bar",
-  "settings": [
-    { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
-    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#171513" },
-    { "type": "color", "id": "text_color", "label": "Text color", "default": "#F8F4EC" }
-  ],
-  "blocks": [
-    {
-      "type": "announcement",
-      "name": "Announcement",
-      "settings": [
-        { "type": "text", "id": "text", "label": "Announcement text", "default": "Premium Gold Plated Jewelry | Free Shipping on Orders ₹999+" },
-        { "type": "url", "id": "link", "label": "Link (optional)" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Announcement Bar",
-      "blocks": [
-        { "type": "announcement", "settings": { "text": "Premium Gold Plated Jewelry | Free Shipping on Orders ₹999+" } }
-      ]
-    }
-  ]
-}
+{"name":"Announcement Bar","class":"section-announcement-bar","settings":[{"type":"checkbox","id":"show_announcement","label":"Show announcement bar","default":true},{"type":"color","id":"bg_color","label":"Background color","default":"#171513"},{"type":"color","id":"text_color","label":"Text color","default":"#F8F4EC"}],"blocks":[{"type":"announcement","name":"Announcement","settings":[{"type":"text","id":"text","label":"Announcement text","default":"Premium Gold Plated Jewellery"},{"type":"url","id":"link","label":"Link (optional)"}]}],"presets":[{"name":"Announcement Bar","blocks":[{"type":"announcement","settings":{"text":"Free Shipping on Orders Above ₹999"}},{"type":"announcement","settings":{"text":"Premium Gold Plated Jewellery"}},{"type":"announcement","settings":{"text":"Designed for Everyday Elegance"}}]}]}
 {% endschema %}
