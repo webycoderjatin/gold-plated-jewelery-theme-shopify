@@ -29,14 +29,5 @@
     "featured": { "type": "featured-collection", "settings": {} },
     "reels": { "type": "social-stories", "settings": {} }
   },
-  "order": [
-    "hero",
-    "circles",
-    "shop_look",
-    "editorial_her",
-    "brand_story",
-    "editorial_him",
-    "featured",
-    "reels"
-  ]
+  "order": ["hero", "circles", "shop_look", "editorial_her", "brand_story", "editorial_him", "featured", "reels"]
 }
