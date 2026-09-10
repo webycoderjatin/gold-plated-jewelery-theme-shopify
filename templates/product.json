@@ -9,14 +9,12 @@
       "type": "product-grid",
       "settings": {
         "heading": "You May Also Like",
+        "collection": "all",
         "show_as_carousel": true,
         "columns": "4",
         "products_to_show": 8
       }
     }
   },
-  "order": [
-    "main",
-    "related"
-  ]
+  "order": ["main", "related"]
 }
