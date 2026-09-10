@@ -1,10 +1,6 @@
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
 {
@@ -12,79 +8,69 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "height_desktop": 700,
-        "height_mobile": 620,
+        "height_desktop": 552,
+        "height_mobile": 540,
         "overlay_color": "#000000",
-        "overlay_opacity": 28,
-        "text_alignment": "center",
+        "overlay_opacity": 35,
+        "text_alignment": "left",
         "text_color": "light",
-        "eyebrow": "Premium Gold Plated Jewelry",
-        "heading": "Gold Plated Jewelry for Every You",
-        "subheading": "Modern designs. Lasting elegance. Made for your everyday moments.",
-        "button_text": "Shop Women",
+        "eyebrow": "TIMELESS SHINE",
+        "heading": "Gold Plated\nJewelry for\nEvery You",
+        "subheading": "Modern designs. Lasting elegance.\nMade for your everyday moments.",
+        "button_text": "SHOP WOMEN →",
         "button_link": "/collections/women-jewellery",
-        "button_style": "outline-white",
-        "button_text_secondary": "Shop Men",
-        "button_link_secondary": "/collections/men",
+        "button_style": "accent",
+        "button_text_secondary": "",
+        "button_link_secondary": "",
         "button_style_secondary": "outline-white"
       }
     },
     "circles": {
       "type": "collection-circles",
-      "settings": { "heading": "Shop by Category" },
+      "settings": { "heading": "" },
       "blocks": {
-        "necklaces": { "type": "category", "settings": { "label": "Necklaces", "link": "/collections/necklaces" } },
-        "earrings": { "type": "category", "settings": { "label": "Earrings", "link": "/collections/earrings" } },
-        "rings": { "type": "category", "settings": { "label": "Rings", "link": "/collections/rings" } },
-        "bracelets": { "type": "category", "settings": { "label": "Bracelets", "link": "/collections/bracelets" } },
-        "mens": { "type": "category", "settings": { "label": "Men's Jewelry", "link": "/collections/men" } },
-        "gifts": { "type": "category", "settings": { "label": "Gift Sets", "link": "/collections/gift-sets" } }
+        "necklaces": { "type": "category", "settings": { "label": "Necklaces", "collection": "necklaces" } },
+        "earrings": { "type": "category", "settings": { "label": "Earrings", "collection": "earrings" } },
+        "rings": { "type": "category", "settings": { "label": "Rings", "collection": "rings" } },
+        "bracelets": { "type": "category", "settings": { "label": "Bracelets", "collection": "bracelets" } },
+        "mens": { "type": "category", "settings": { "label": "Men's Collection", "collection": "men" } },
+        "gifts": { "type": "category", "settings": { "label": "Gift Sets", "collection": "gift-sets" } }
       }
     },
-    "benefits": { "type": "gold-benefits", "settings": {} },
-    "editorial_her": {
+    "benefits": { "type": "gold-benefits", "settings": {}, "blocks": {
+      "quality": { "type": "benefit", "settings": { "icon": "◇", "title": "Premium", "text": "Gold Plated Quality" } },
+      "lasting": { "type": "benefit", "settings": { "icon": "♢", "title": "Tarnish Resistant", "text": "& Long Lasting" } },
+      "shipping": { "type": "benefit", "settings": { "icon": "⌁", "title": "Free Shipping", "text": "on Orders ₹999+" } },
+      "gifting": { "type": "benefit", "settings": { "icon": "♧", "title": "Perfect for Gifting", "text": "Loved by Thousands" } }
+    } },
+    "women": {
       "type": "product-grid",
       "settings": {
-        "eyebrow": "For Her",
-        "heading": "The Gold Edit",
-        "subheading": "Elegant gold-plated pieces made to layer, stack and live in.",
+        "eyebrow": "FOR HER",
+        "heading": "Elegance in Every Detail",
+        "subheading": "Explore our most loved gold plated pieces for her.",
         "collection": "women-jewellery",
         "products_to_show": 4,
         "columns": "4",
         "show_as_carousel": false,
         "bg_white": false,
-        "button_text": "Shop Women's Jewelry",
-        "button_link": "/collections/women-jewellery"
+        "button_text": "",
+        "button_link": ""
       }
     },
-    "brand_story": {
-      "type": "brand-story",
+    "men_banner": {
+      "type": "gold-men-banner",
       "settings": {
-        "heading": "Everyday luxury, finished in gold.",
-        "text": "<p>We create gold-plated jewelry that brings a polished, elevated feel to everyday dressing. From delicate layers to bold statement pieces, each design is made to be worn, gifted and remembered.</p>",
-        "show_newsletter": false,
-        "newsletter_title": "BECOME AN INSIDER",
-        "bg_white": true
-      }
-    },
-    "editorial_him": {
-      "type": "product-grid",
-      "settings": {
-        "eyebrow": "For Him",
-        "heading": "The Men's Gold Edit",
-        "subheading": "Bold chains, bracelets and rings with a clean modern finish.",
-        "collection": "men",
-        "products_to_show": 4,
-        "columns": "4",
-        "show_as_carousel": false,
-        "bg_white": true,
-        "button_text": "Shop Men's Jewelry",
+        "eyebrow": "FOR HIM",
+        "heading": "Bold. Refined.\nAlways In Style.",
+        "text": "Modern gold plated jewelry for the modern man.",
+        "button_text": "SHOP MEN →",
         "button_link": "/collections/men"
       }
     },
     "collections": {
       "type": "gold-collections",
-      "settings": { "subheading": "Modern gold-plated pieces for every mood, moment and milestone." },
+      "settings": { "subheading": "" },
       "blocks": {
         "everyday": { "type": "collection", "settings": { "title": "Everyday Essentials", "collection": "women-jewellery" } },
         "wedding": { "type": "collection", "settings": { "title": "Wedding & Festive", "collection": "weddings" } },
@@ -92,10 +78,15 @@
         "gifts": { "type": "collection", "settings": { "title": "Gift Sets", "collection": "gift-sets" } }
       }
     },
-    "reels": {
-      "type": "social-stories",
-      "settings": { "heading": "Styled in Real Life", "bg_white": false }
+    "newsletter": {
+      "type": "gold-newsletter",
+      "settings": {
+        "heading": "Join Our Inner Circle",
+        "text": "Get exclusive offers, new arrivals and styling tips.",
+        "placeholder": "Enter your email",
+        "button_text": "SUBSCRIBE"
+      }
     }
   },
-  "order": ["hero", "circles", "benefits", "editorial_her", "brand_story", "editorial_him", "collections", "reels"]
+  "order": ["hero", "circles", "benefits", "women", "men_banner", "collections", "newsletter"]
 }
