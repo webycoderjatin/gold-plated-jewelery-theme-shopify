@@ -7,24 +7,12 @@
 
   <div class="category-circles__track no-scrollbar" data-carousel>
     {%- for block in section.blocks -%}
-      <a
-        href="{{ block.settings.link | default: '#' }}"
-        class="category-circle{% if forloop.first %} category-circle--active{% endif %}"
-        {{ block.shopify_attributes }}
-        aria-label="{{ block.settings.label }}"
-      >
+      <a href="{{ block.settings.link | default: routes.collections_url }}" class="category-circle{% if forloop.first %} category-circle--active{% endif %}" {{ block.shopify_attributes }} aria-label="{{ block.settings.label | escape }}">
         <div class="category-circle__img-wrap">
           {%- if block.settings.image != blank -%}
-            <img
-              src="{{ block.settings.image | image_url: width: 240 }}"
-              alt="{{ block.settings.label | escape }}"
-              class="category-circle__img"
-              width="120"
-              height="120"
-              loading="lazy"
-            >
+            <img src="{{ block.settings.image | image_url: width: 240 }}" alt="{{ block.settings.label | escape }}" class="category-circle__img" width="120" height="120" loading="lazy">
           {%- else -%}
-            <div class="category-circle__img" style="background: var(--color-bg-light);"></div>
+            <div class="category-circle__img" style="background: linear-gradient(145deg, #E9DFCC, #C4A56B);"></div>
           {%- endif -%}
         </div>
         <span class="category-circle__name">{{ block.settings.label }}</span>
@@ -32,14 +20,12 @@
     {%- endfor -%}
 
     {%- if section.blocks.size == 0 -%}
-      {%- assign default_cats = "Women's Ethnic,Women's Jewellery,Men's Sherwanis,Men's Accessories,Bridal,New Arrivals" | split: "," -%}
+      {%- assign default_cats = "Necklaces,Earrings,Rings,Bracelets,Men's Jewelry,Gift Sets" | split: "," -%}
       {%- for cat in default_cats -%}
-        <div class="category-circle">
-          <div class="category-circle__img-wrap">
-            <div class="category-circle__img skeleton"></div>
-          </div>
+        <a href="{{ routes.collections_url }}" class="category-circle">
+          <div class="category-circle__img-wrap"><div class="category-circle__img" style="background: linear-gradient(145deg, #E9DFCC, #C4A56B);"></div></div>
           <span class="category-circle__name">{{ cat }}</span>
-        </div>
+        </a>
       {%- endfor -%}
     {%- endif -%}
   </div>
@@ -47,50 +33,33 @@
 
 {% schema %}
 {
-  "name": "Category Circles",
+  "name": "Jewelry Categories",
   "tag": "section",
   "class": "section-category-circles",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading"
-    }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by Category" }
   ],
   "blocks": [
     {
       "type": "category",
       "name": "Category",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Category image"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Category name",
-          "default": "Category"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Category link"
-        }
+        { "type": "image_picker", "id": "image", "label": "Category image" },
+        { "type": "text", "id": "label", "label": "Category name", "default": "Category" },
+        { "type": "url", "id": "link", "label": "Category link" }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Category Circles",
+      "name": "Jewelry Categories",
       "blocks": [
-        { "type": "category", "settings": { "label": "Women's Ethnic" } },
-        { "type": "category", "settings": { "label": "Women's Jewellery" } },
-        { "type": "category", "settings": { "label": "Men's Sherwanis" } },
-        { "type": "category", "settings": { "label": "Men's Accessories" } },
-        { "type": "category", "settings": { "label": "Bridal" } },
-        { "type": "category", "settings": { "label": "New Arrivals" } }
+        { "type": "category", "settings": { "label": "Necklaces" } },
+        { "type": "category", "settings": { "label": "Earrings" } },
+        { "type": "category", "settings": { "label": "Rings" } },
+        { "type": "category", "settings": { "label": "Bracelets" } },
+        { "type": "category", "settings": { "label": "Men's Jewelry" } },
+        { "type": "category", "settings": { "label": "Gift Sets" } }
       ]
     }
   ]
