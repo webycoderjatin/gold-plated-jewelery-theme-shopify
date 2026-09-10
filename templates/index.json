@@ -12,129 +12,90 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "height_desktop": 680,
-        "height_mobile": 520,
+        "height_desktop": 700,
+        "height_mobile": 620,
         "overlay_color": "#000000",
-        "overlay_opacity": 30,
+        "overlay_opacity": 28,
         "text_alignment": "center",
         "text_color": "light",
-        "eyebrow": "The Festive '26 Collection",
-        "heading": "The Festive '26 Collection",
-        "subheading": "",
-        "button_text": "Shop Now",
-        "button_link": "",
+        "eyebrow": "Premium Gold Plated Jewelry",
+        "heading": "Gold Plated Jewelry for Every You",
+        "subheading": "Modern designs. Lasting elegance. Made for your everyday moments.",
+        "button_text": "Shop Women",
+        "button_link": "/collections/women-jewellery",
         "button_style": "outline-white",
-        "button_text_secondary": "",
-        "button_link_secondary": "",
-        "button_style_secondary": "outline-white"
-      }
-    },
-    "hero_B6KBDV": {
-      "type": "hero",
-      "name": "Hero",
-      "settings": {
-        "image_desktop": "shopify://shop_images/hero-bg.png",
-        "height_desktop": 680,
-        "height_mobile": 520,
-        "overlay_color": "#000000",
-        "overlay_opacity": 30,
-        "text_alignment": "center",
-        "text_color": "light",
-        "eyebrow": "Through the Thread of Time",
-        "heading": "The Festive '26 Collection",
-        "subheading": "",
-        "button_text": "Shop the Collection",
-        "button_link": "",
-        "button_style": "outline-white",
-        "button_text_secondary": "",
-        "button_link_secondary": "",
+        "button_text_secondary": "Shop Men",
+        "button_link_secondary": "/collections/men",
         "button_style_secondary": "outline-white"
       }
     },
     "circles": {
       "type": "collection-circles",
-      "settings": {
-        "heading": ""
+      "settings": { "heading": "Shop by Category" },
+      "blocks": {
+        "necklaces": { "type": "category", "settings": { "label": "Necklaces", "link": "/collections/necklaces" } },
+        "earrings": { "type": "category", "settings": { "label": "Earrings", "link": "/collections/earrings" } },
+        "rings": { "type": "category", "settings": { "label": "Rings", "link": "/collections/rings" } },
+        "bracelets": { "type": "category", "settings": { "label": "Bracelets", "link": "/collections/bracelets" } },
+        "mens": { "type": "category", "settings": { "label": "Men's Jewelry", "link": "/collections/men" } },
+        "gifts": { "type": "category", "settings": { "label": "Gift Sets", "link": "/collections/gift-sets" } }
       }
     },
-    "shop_look": {
-      "type": "shop-the-look",
-      "settings": {
-        "eyebrow": "",
-        "heading": "Shop The Look",
-        "subheading": "Curated styling, from outfit to accessories.",
-        "image": "shopify://shop_images/shop-the-look-BsI7m1Oq.png"
-      }
-    },
+    "benefits": { "type": "gold-benefits", "settings": {} },
     "editorial_her": {
       "type": "product-grid",
       "settings": {
-        "eyebrow": "",
-        "heading": "For Her: The Curated Edit",
-        "subheading": "",
+        "eyebrow": "For Her",
+        "heading": "The Gold Edit",
+        "subheading": "Elegant gold-plated pieces made to layer, stack and live in.",
         "collection": "women-jewellery",
         "products_to_show": 4,
         "columns": "4",
         "show_as_carousel": false,
         "bg_white": false,
-        "button_text": "",
-        "button_link": ""
+        "button_text": "Shop Women's Jewelry",
+        "button_link": "/collections/women-jewellery"
       }
     },
     "brand_story": {
       "type": "brand-story",
       "settings": {
-        "heading": "Through the threads of time, we weave heritage into every piece.",
-        "text": "<p>Aura stands as a testament to the timeless elegance of South Asian craftsmanship, re-imagined for the modern aesthetic. Born from a desire to bridge heritage with contemporary luxury, each piece in our collection is a narrative of intricate artistry, passed down through generations of master artisans.</p>",
-        "show_newsletter": true,
+        "heading": "Everyday luxury, finished in gold.",
+        "text": "<p>We create gold-plated jewelry that brings a polished, elevated feel to everyday dressing. From delicate layers to bold statement pieces, each design is made to be worn, gifted and remembered.</p>",
+        "show_newsletter": false,
         "newsletter_title": "BECOME AN INSIDER",
-        "bg_white": false
+        "bg_white": true
       }
     },
     "editorial_him": {
       "type": "product-grid",
       "settings": {
-        "eyebrow": "",
-        "heading": "For Him: The Curated Edit",
-        "subheading": "",
+        "eyebrow": "For Him",
+        "heading": "The Men's Gold Edit",
+        "subheading": "Bold chains, bracelets and rings with a clean modern finish.",
         "collection": "men",
         "products_to_show": 4,
         "columns": "4",
         "show_as_carousel": false,
         "bg_white": true,
-        "button_text": "",
-        "button_link": ""
+        "button_text": "Shop Men's Jewelry",
+        "button_link": "/collections/men"
       }
     },
-    "featured": {
-      "type": "featured-collection",
-      "settings": {
-        "eyebrow": "New Arrivals",
-        "heading": "The Facelets Edit",
-        "text": "Discover pieces designed to frame and illuminate. Intricate detailing meets modern silhouettes.",
-        "button_text": "Shop All",
-        "button_link": "",
-        "collection": "",
-        "bg_white": false
+    "collections": {
+      "type": "gold-collections",
+      "settings": { "subheading": "Modern gold-plated pieces for every mood, moment and milestone." },
+      "blocks": {
+        "everyday": { "type": "collection", "settings": { "title": "Everyday Essentials", "collection": "women-jewellery" } },
+        "wedding": { "type": "collection", "settings": { "title": "Wedding & Festive", "collection": "weddings" } },
+        "minimal": { "type": "collection", "settings": { "title": "Minimal & Modern", "collection": "new-arrivals" } },
+        "gifts": { "type": "collection", "settings": { "title": "Gift Sets", "collection": "gift-sets" } }
       }
     },
     "reels": {
       "type": "social-stories",
-      "settings": {
-        "heading": "Our Social Stories",
-        "bg_white": false
-      }
+      "settings": { "heading": "Styled in Real Life", "bg_white": false }
     }
   },
-  "order": [
-    "hero",
-    "hero_B6KBDV",
-    "circles",
-    "shop_look",
-    "editorial_her",
-    "brand_story",
-    "editorial_him",
-    "featured",
-    "reels"
-  ]
+  "order": ["hero", "circles", "benefits", "editorial_her", "brand_story", "editorial_him", "collections", "reels"]
 }
