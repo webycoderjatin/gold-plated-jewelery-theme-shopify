@@ -48,7 +48,7 @@
     {{ content_for_layout }}
   </main>
 
-  {% section 'footer' %}
+  {% sections 'footer-group' %}
   {% render 'cart-drawer' %}
   {{ 'theme.js' | asset_url | script_tag }}
 </body>
