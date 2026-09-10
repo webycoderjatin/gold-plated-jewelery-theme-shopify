@@ -1,0 +1,98 @@
+<section class="category-circles section--md">
+  <div class="container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="section-heading text-center" style="margin-bottom: var(--sp-8);">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+  </div>
+
+  <div class="category-circles__track no-scrollbar" data-carousel>
+    {%- for block in section.blocks -%}
+      <a
+        href="{{ block.settings.link | default: '#' }}"
+        class="category-circle{% if forloop.first %} category-circle--active{% endif %}"
+        {{ block.shopify_attributes }}
+        aria-label="{{ block.settings.label }}"
+      >
+        <div class="category-circle__img-wrap">
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 240 }}"
+              alt="{{ block.settings.label | escape }}"
+              class="category-circle__img"
+              width="120"
+              height="120"
+              loading="lazy"
+            >
+          {%- else -%}
+            <div class="category-circle__img" style="background: var(--color-bg-light);"></div>
+          {%- endif -%}
+        </div>
+        <span class="category-circle__name">{{ block.settings.label }}</span>
+      </a>
+    {%- endfor -%}
+
+    {%- if section.blocks.size == 0 -%}
+      {%- assign default_cats = "Women's Ethnic,Women's Jewellery,Men's Sherwanis,Men's Accessories,Bridal,New Arrivals" | split: "," -%}
+      {%- for cat in default_cats -%}
+        <div class="category-circle">
+          <div class="category-circle__img-wrap">
+            <div class="category-circle__img skeleton"></div>
+          </div>
+          <span class="category-circle__name">{{ cat }}</span>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category Circles",
+  "tag": "section",
+  "class": "section-category-circles",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Category name",
+          "default": "Category"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Category link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Circles",
+      "blocks": [
+        { "type": "category", "settings": { "label": "Women's Ethnic" } },
+        { "type": "category", "settings": { "label": "Women's Jewellery" } },
+        { "type": "category", "settings": { "label": "Men's Sherwanis" } },
+        { "type": "category", "settings": { "label": "Men's Accessories" } },
+        { "type": "category", "settings": { "label": "Bridal" } },
+        { "type": "category", "settings": { "label": "New Arrivals" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

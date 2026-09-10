@@ -1,0 +1,256 @@
+{%- liquid
+  assign hero_height_desktop = section.settings.height_desktop
+  assign hero_height_mobile  = section.settings.height_mobile
+  assign text_align          = section.settings.text_alignment
+  assign text_color          = section.settings.text_color
+-%}
+
+<section class="hero" style="--hero-height-d: {{ hero_height_desktop }}px; --hero-height-m: {{ hero_height_mobile }}px;">
+  <style>
+    #hero-{{ section.id }} .hero__media { height: {{ hero_height_desktop }}px; }
+    @media (max-width: 768px) {
+      #hero-{{ section.id }} .hero__media { height: {{ hero_height_mobile }}px; }
+    }
+  </style>
+
+  {%- if section.settings.image_desktop != blank -%}
+    <img
+      id="hero-{{ section.id }}"
+      src="{{ section.settings.image_desktop | image_url: width: 1920 }}"
+      srcset="
+        {{ section.settings.image_desktop | image_url: width: 750 }} 750w,
+        {{ section.settings.image_desktop | image_url: width: 1100 }} 1100w,
+        {{ section.settings.image_desktop | image_url: width: 1500 }} 1500w,
+        {{ section.settings.image_desktop | image_url: width: 1920 }} 1920w
+      "
+      sizes="100vw"
+      alt="{{ section.settings.heading | escape }}"
+      class="hero__media"
+      loading="eager"
+      width="1920"
+      height="{{ hero_height_desktop }}"
+    >
+  {%- else -%}
+    <div
+      id="hero-{{ section.id }}"
+      class="hero__media"
+      style="background: linear-gradient(135deg, #EAE6DF 0%, #D4C4A0 100%);"
+    ></div>
+  {%- endif -%}
+
+  {%- if section.settings.overlay_opacity > 0 -%}
+    <div
+      class="hero__overlay"
+      style="background-color: {{ section.settings.overlay_color }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+      aria-hidden="true"
+    ></div>
+  {%- endif -%}
+
+  <div class="hero__content hero__content--{{ text_align }} hero__text--{{ text_color }}">
+    <div class="hero__inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="hero__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 class="hero__heading">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero__subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.button_text != blank or section.settings.button_text_secondary != blank -%}
+        <div class="hero__buttons">
+          {%- if section.settings.button_text != blank -%}
+            <a
+              href="{{ section.settings.button_link | default: '#' }}"
+              class="btn btn-{{ section.settings.button_style }}"
+            >
+              {{ section.settings.button_text }}
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.button_text_secondary != blank -%}
+            <a
+              href="{{ section.settings.button_link_secondary | default: '#' }}"
+              class="btn btn-{{ section.settings.button_style_secondary }}"
+            >
+              {{ section.settings.button_text_secondary }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "section",
+  "class": "section-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image (optional)"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "min": 400,
+      "max": 900,
+      "step": 20,
+      "default": 680,
+      "unit": "px",
+      "label": "Desktop height"
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 300,
+      "max": 700,
+      "step": 20,
+      "default": 520,
+      "unit": "px",
+      "label": "Mobile height"
+    },
+    {
+      "type": "header",
+      "content": "Overlay"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "default": 30,
+      "unit": "%",
+      "label": "Overlay opacity"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "label": "Text color",
+      "options": [
+        { "value": "light", "label": "Light (white)" },
+        { "value": "dark",  "label": "Dark (charcoal)" }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "The Festive '26 Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Festive '26 Collection"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Primary Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary",       "label": "Filled dark" },
+        { "value": "accent",        "label": "Filled gold" },
+        { "value": "outline",       "label": "Outline dark" },
+        { "value": "outline-white", "label": "Outline white" }
+      ],
+      "default": "outline-white"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text_secondary",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link_secondary",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style_secondary",
+      "label": "Button style",
+      "options": [
+        { "value": "primary",       "label": "Filled dark" },
+        { "value": "accent",        "label": "Filled gold" },
+        { "value": "outline",       "label": "Outline dark" },
+        { "value": "outline-white", "label": "Outline white" }
+      ],
+      "default": "outline-white"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "settings": {
+        "heading": "The Festive '26 Collection",
+        "eyebrow": "Through the Thread of Time",
+        "button_text": "Shop the Collection",
+        "button_style": "outline-white"
+      }
+    }
+  ]
+}
+{% endschema %}

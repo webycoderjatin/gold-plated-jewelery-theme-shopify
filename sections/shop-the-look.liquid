@@ -1,0 +1,214 @@
+<section class="shop-the-look">
+  <div class="container">
+    <div class="shop-the-look__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="section-eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      <h2 class="section-heading">{{ section.settings.heading | default: 'Shop The Look' }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="section-subheading">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="shop-the-look__image-wrap">
+    {%- if section.settings.image != blank -%}
+      <img
+        src="{{ section.settings.image | image_url: width: 1920 }}"
+        srcset="
+          {{ section.settings.image | image_url: width: 800 }} 800w,
+          {{ section.settings.image | image_url: width: 1200 }} 1200w,
+          {{ section.settings.image | image_url: width: 1600 }} 1600w,
+          {{ section.settings.image | image_url: width: 1920 }} 1920w
+        "
+        sizes="100vw"
+        alt="{{ section.settings.heading | escape }}"
+        class="shop-the-look__img"
+        loading="lazy"
+        width="1920"
+        height="800"
+      >
+    {%- else -%}
+      <div style="width:100%;height:500px;background:var(--color-bg-light);display:flex;align-items:center;justify-content:center;">
+        <p style="color:var(--color-text-secondary);">Add a "Shop The Look" image in the Theme Editor</p>
+      </div>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'hotspot' -%}
+        {%- assign hp = block.settings -%}
+        <div
+          class="hotspot"
+          style="top: {{ hp.position_y }}%; left: {{ hp.position_x }}%;"
+          {{ block.shopify_attributes }}
+        >
+          <div class="hotspot__dot" role="button" tabindex="0" aria-label="View product hotspot"></div>
+
+          {%- if hp.product != blank -%}
+            {%- assign hp_product = all_products[hp.product] -%}
+            <div class="hotspot__card hotspot__card--{{ hp.card_side }}">
+              {%- if hp_product.featured_image != blank -%}
+                <img
+                  src="{{ hp_product.featured_image | image_url: width: 140 }}"
+                  alt="{{ hp_product.title | escape }}"
+                  class="hotspot__card-img"
+                  width="70"
+                  height="90"
+                  loading="lazy"
+                >
+              {%- endif -%}
+              <div class="hotspot__card-info">
+                <span class="hotspot__card-type">{{ hp_product.type | default: 'Jewellery' }}</span>
+                <p class="hotspot__card-name">{{ hp_product.title }}</p>
+                <p class="hotspot__card-price">
+                  {%- render 'price', product: hp_product -%}
+                </p>
+                <a href="{{ hp_product.url }}" class="hotspot__card-btn btn-primary btn">View Product</a>
+              </div>
+            </div>
+          {%- elsif hp.custom_name != blank -%}
+            <div class="hotspot__card hotspot__card--{{ hp.card_side }}">
+              {%- if hp.custom_image != blank -%}
+                <img
+                  src="{{ hp.custom_image | image_url: width: 140 }}"
+                  alt="{{ hp.custom_name | escape }}"
+                  class="hotspot__card-img"
+                  width="70"
+                  height="90"
+                  loading="lazy"
+                >
+              {%- endif -%}
+              <div class="hotspot__card-info">
+                <span class="hotspot__card-type">{{ hp.custom_type | default: 'Jewellery' }}</span>
+                <p class="hotspot__card-name">{{ hp.custom_name }}</p>
+                <p class="hotspot__card-price">{{ hp.custom_price }}</p>
+                {%- if hp.custom_link != blank -%}
+                  <a href="{{ hp.custom_link }}" class="hotspot__card-btn btn-primary btn">View Product</a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop The Look",
+  "tag": "section",
+  "class": "section-shop-the-look",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop The Look"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Curated styling, from outfit to accessories."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Lookbook image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Hotspot",
+      "limit": 6,
+      "settings": [
+        {
+          "type": "range",
+          "id": "position_x",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 30,
+          "unit": "%",
+          "label": "Horizontal position"
+        },
+        {
+          "type": "range",
+          "id": "position_y",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 40,
+          "unit": "%",
+          "label": "Vertical position"
+        },
+        {
+          "type": "select",
+          "id": "card_side",
+          "label": "Card position",
+          "options": [
+            { "value": "left",  "label": "Show card on right" },
+            { "value": "right", "label": "Show card on left" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "header",
+          "content": "Link to Shopify product"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "header",
+          "content": "Or enter manually"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Product image"
+        },
+        {
+          "type": "text",
+          "id": "custom_name",
+          "label": "Product name"
+        },
+        {
+          "type": "text",
+          "id": "custom_type",
+          "label": "Product type",
+          "default": "Jewellery"
+        },
+        {
+          "type": "text",
+          "id": "custom_price",
+          "label": "Price"
+        },
+        {
+          "type": "url",
+          "id": "custom_link",
+          "label": "Product link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop The Look",
+      "settings": {
+        "heading": "Shop The Look",
+        "subheading": "Curated styling, from outfit to accessories."
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,123 @@
+<section class="promo-banner" style="min-height: {{ section.settings.height }}px;">
+  {%- if section.settings.image != blank -%}
+    <img
+      src="{{ section.settings.image | image_url: width: 1920 }}"
+      alt="{{ section.settings.heading | escape }}"
+      class="promo-banner__img"
+      loading="lazy"
+      width="1920"
+      height="{{ section.settings.height }}"
+    >
+  {%- else -%}
+    <div class="promo-banner__img" style="background: var(--color-bg-light);"></div>
+  {%- endif -%}
+
+  <div class="promo-banner__overlay" style="background-color: {{ section.settings.overlay_color }}; opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+
+  <div class="promo-banner__content" style="display:flex; flex-direction:column; justify-content:center; height:100%; min-height:{{ section.settings.height }}px; color: {{ section.settings.text_color }};">
+    {%- if section.settings.heading != blank -%}
+      <h2 style="font-family: var(--font-serif); font-size: clamp(32px, 5vw, 56px); font-weight: 400; margin-bottom: var(--sp-4);">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    
+    {%- if section.settings.subheading != blank -%}
+      <p style="font-size: 15px; margin-bottom: var(--sp-6);">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank -%}
+      <div>
+        <a href="{{ section.settings.button_link | default: '#' }}" class="btn btn-{{ section.settings.button_style }}">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promo Banner",
+  "tag": "section",
+  "class": "section-promo-banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "min": 200,
+      "max": 600,
+      "step": 50,
+      "default": 350,
+      "unit": "px",
+      "label": "Banner height"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "default": 30,
+      "unit": "%",
+      "label": "Overlay opacity"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Aura Bridal Services"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Book a virtual or in-store consultation with our stylists."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Book Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Dark" },
+        { "value": "outline-white", "label": "Outline White" },
+        { "value": "accent", "label": "Gold" }
+      ],
+      "default": "outline-white"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo Banner",
+      "settings": {
+        "heading": "Aura Bridal Services"
+      }
+    }
+  ]
+}
+{% endschema %}

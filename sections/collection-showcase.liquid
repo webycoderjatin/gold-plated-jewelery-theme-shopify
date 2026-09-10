@@ -1,0 +1,156 @@
+<section class="editorial-section{% if section.settings.bg_white %} section--bg-white{% endif %}">
+  <div class="editorial-section__heading-wrap">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="section-eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    <h2 class="section-heading">{{ section.settings.heading }}</h2>
+    {%- if section.settings.subheading != blank -%}
+      <p class="section-subheading text-center">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="editorial-cards">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'category_card' -%}
+        <a
+          href="{{ block.settings.link | default: '#' }}"
+          class="editorial-card"
+          {{ block.shopify_attributes }}
+          aria-label="{{ block.settings.title }}"
+        >
+          <div class="editorial-card__images">
+            {%- if block.settings.image_main != blank -%}
+              <img
+                src="{{ block.settings.image_main | image_url: width: 600 }}"
+                alt="{{ block.settings.title | escape }}"
+                class="editorial-card__img-main"
+                width="400"
+                height="711"
+                loading="lazy"
+              >
+            {%- else -%}
+              <div class="editorial-card__img-main skeleton"></div>
+            {%- endif -%}
+
+            {%- if block.settings.image_accent != blank -%}
+              <img
+                src="{{ block.settings.image_accent | image_url: width: 200 }}"
+                alt="{{ block.settings.title | escape }} detail"
+                class="editorial-card__img-accent"
+                width="140"
+                height="140"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+          <h3 class="editorial-card__title">{{ block.settings.title }}</h3>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if section.blocks.size == 0 -%}
+      {%- assign placeholder_titles = "Fine Jewellery,Ethnic Wear,Bridal Sets,Men's Collection" | split: "," -%}
+      {%- for t in placeholder_titles -%}
+        <div class="editorial-card">
+          <div class="editorial-card__images">
+            <div class="editorial-card__img-main skeleton"></div>
+          </div>
+          <h3 class="editorial-card__title">{{ t }}</h3>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.button_text != blank -%}
+    <div class="text-center" style="margin-top: var(--sp-10);">
+      <a href="{{ section.settings.button_link | default: '#' }}" class="btn btn-outline">
+        {{ section.settings.button_text }}
+      </a>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Collection Showcase",
+  "tag": "section",
+  "class": "section-collection-showcase",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "For Her: The Curated Edit"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "bg_white",
+      "label": "Light background",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_card",
+      "name": "Category Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_main",
+          "label": "Main image (portrait)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_accent",
+          "label": "Accent image (square)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Category"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Showcase",
+      "settings": {
+        "heading": "For Her: The Curated Edit"
+      },
+      "blocks": [
+        { "type": "category_card", "settings": { "title": "Fine Jewellery" } },
+        { "type": "category_card", "settings": { "title": "Ethnic Wear" } },
+        { "type": "category_card", "settings": { "title": "Bridal Sets" } },
+        { "type": "category_card", "settings": { "title": "Accessories" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

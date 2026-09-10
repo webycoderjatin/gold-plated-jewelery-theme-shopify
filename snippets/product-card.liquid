@@ -1,0 +1,81 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign compare_at_price = current_variant.compare_at_price
+  assign price = current_variant.price
+  assign is_on_sale = false
+  if compare_at_price > price
+    assign is_on_sale = true
+  endif
+-%}
+
+<div class="product-card">
+  <a href="{{ product.url | default: '#' }}" class="product-card__image-wrap">
+    {%- if product.featured_image != blank -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.title | escape }}"
+        class="product-card__img"
+        loading="lazy"
+        width="300"
+        height="400"
+      >
+      {%- if product.media[1] != blank -%}
+        <img
+          src="{{ product.media[1] | image_url: width: 600 }}"
+          alt="{{ product.title | escape }} alternate"
+          class="product-card__img--hover"
+          loading="lazy"
+          width="300"
+          height="400"
+        >
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'product-card__img' }}
+    {%- endif -%}
+
+    <div class="product-card__badges">
+      {%- if is_on_sale -%}
+        <span class="product-badge product-badge--sale">{{ 'products.product.sale_badge' | t }}</span>
+      {%- endif -%}
+      {%- if product.tags contains 'New' -%}
+        <span class="product-badge product-badge--new">{{ 'products.product.new_badge' | t }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- if product.id -%}
+      <button class="product-card__wishlist" data-wishlist-btn="{{ product.id }}" aria-label="Add to wishlist">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      </button>
+    {%- endif -%}
+
+    {%- if current_variant.available and product.id -%}
+      <button class="product-card__quick-add" data-quick-add="{{ current_variant.id }}">Quick Add</button>
+    {%- endif -%}
+  </a>
+
+  <div class="product-card__info">
+    <a href="{{ product.url | default: '#' }}" class="product-card__title">{{ product.title | default: 'Example Product Title' }}</a>
+    
+    <div class="product-card__price-row">
+      <div class="product-card__prices">
+        {%- if product != blank -%}
+          {%- if is_on_sale -%}
+            <span class="product-card__price product-card__price--sale">{{ price | money }}</span>
+            <span class="product-card__compare-price">{{ compare_at_price | money }}</span>
+          {%- else -%}
+            <span class="product-card__price">{{ price | money }}</span>
+          {%- endif -%}
+        {%- else -%}
+          <span class="product-card__price">$150.00</span>
+        {%- endif -%}
+      </div>
+
+      <a href="{{ product.url | default: '#' }}" class="product-card__shop-btn" aria-label="Shop {{ product.title }}">
+        <span class="btn-text">Shop Now</span>
+        <span class="btn-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>

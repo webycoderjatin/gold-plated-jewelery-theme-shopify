@@ -1,0 +1,120 @@
+<section class="section--lg{% if section.settings.bg_white %} section--bg-white{% endif %}">
+  <div class="container">
+    <div style="display:grid; grid-template-columns: 4fr 8fr; gap: var(--sp-12); align-items:center;">
+      
+      <!-- Text Side -->
+      <div class="facelets-text" style="padding-right: var(--sp-8);">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="section-eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2 class="section-heading" style="margin-bottom:var(--sp-4);">{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <p class="section-subheading" style="margin-left:0;">{{ section.settings.text }}</p>
+        {%- endif -%}
+        {%- if section.settings.button_text != blank -%}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="btn btn-outline" style="margin-top:var(--sp-6);">
+            {{ section.settings.button_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- Carousel Side -->
+      <div class="facelets-carousel carousel-wrapper" data-carousel style="width: 100%; overflow: hidden;">
+        <button class="carousel-btn carousel-btn--prev" data-carousel-prev aria-label="Previous" style="left: -16px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        
+        <div class="product-carousel no-scrollbar" data-carousel-track style="padding-bottom:var(--sp-4);">
+          {%- if section.settings.collection != blank -%}
+            {%- assign collection_obj = collections[section.settings.collection] -%}
+            {%- for product in collection_obj.products limit: 6 -%}
+              <div style="flex: 0 0 calc(33.333% - var(--sp-6) * 2 / 3); scroll-snap-align: start;">
+                {%- render 'product-card', product: product -%}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <div style="flex: 0 0 calc(33.333% - var(--sp-6) * 2 / 3); scroll-snap-align: start;">
+                {%- render 'product-card', product: null -%}
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+
+        <button class="carousel-btn carousel-btn--next" data-carousel-next aria-label="Next" style="right: -16px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width: 1024px) {
+    .section-featured-collection > .container > div {
+      grid-template-columns: 1fr !important;
+      gap: var(--sp-8) !important;
+    }
+    .facelets-text { padding-right: 0 !important; text-align: center; }
+    .facelets-text .section-subheading { margin: var(--sp-4) auto 0 !important; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Featured Facelets",
+  "tag": "section",
+  "class": "section-featured-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "New Arrivals"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Facelets Edit"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text description",
+      "default": "Discover pieces designed to frame and illuminate. Intricate detailing meets modern silhouettes."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to display"
+    },
+    {
+      "type": "checkbox",
+      "id": "bg_white",
+      "label": "Light background",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Facelets",
+      "settings": {
+        "heading": "The Facelets Edit"
+      }
+    }
+  ]
+}
+{% endschema %}

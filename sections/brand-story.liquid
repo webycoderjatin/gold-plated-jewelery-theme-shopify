@@ -1,0 +1,115 @@
+<section class="brand-story{% if section.settings.bg_white %} section--bg-white{% endif %}">
+  <div class="container">
+    <div class="brand-story__inner">
+      <div class="brand-story__media">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            srcset="
+              {{ section.settings.image | image_url: width: 400 }} 400w,
+              {{ section.settings.image | image_url: width: 600 }} 600w,
+              {{ section.settings.image | image_url: width: 800 }} 800w
+            "
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt="{{ section.settings.heading | escape }}"
+            class="brand-story__img"
+            loading="lazy"
+            width="800"
+            height="1000"
+          >
+        {%- else -%}
+          <div class="brand-story__img" style="background: var(--color-bg-light);"></div>
+        {%- endif -%}
+      </div>
+
+      <div class="brand-story__content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="brand-story__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="brand-story__body">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.show_newsletter -%}
+          <div class="brand-story__newsletter">
+            <h3 class="brand-story__newsletter-title">{{ section.settings.newsletter_title }}</h3>
+            {% form 'customer', class: 'newsletter-form', data-newsletter-form: true %}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              <input
+                type="email"
+                name="contact[email]"
+                class="newsletter-input"
+                value="{{ form.email }}"
+                aria-required="true"
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="email"
+                placeholder="{{ 'newsletter.placeholder' | t }}"
+                required
+              >
+              <button type="submit" class="newsletter-submit" name="commit" id="Subscribe">
+                {{ 'newsletter.submit' | t }}
+              </button>
+            {% endform %}
+            <p class="newsletter-success" data-newsletter-msg style="display:none; font-size:12px; margin-top:8px;"></p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Story",
+  "tag": "section",
+  "class": "section-brand-story",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Through the threads of time, we weave heritage into every piece."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Aura stands as a testament to the timeless elegance of South Asian craftsmanship, re-imagined for the modern aesthetic. Born from a desire to bridge heritage with contemporary luxury, each piece in our collection is a narrative of intricate artistry, passed down through generations of master artisans.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter signup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter title",
+      "default": "BECOME AN INSIDER"
+    },
+    {
+      "type": "checkbox",
+      "id": "bg_white",
+      "label": "Light background",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Story",
+      "settings": {
+        "heading": "Through the threads of time, we weave heritage into every piece.",
+        "show_newsletter": true
+      }
+    }
+  ]
+}
+{% endschema %}

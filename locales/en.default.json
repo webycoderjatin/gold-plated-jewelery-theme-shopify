@@ -1,0 +1,77 @@
+{
+  "general": {
+    "search": {
+      "search": "Search",
+      "search_placeholder": "Search products...",
+      "no_results": "No results found for",
+      "results_with_count": "{{ count }} result",
+      "results_with_count_plural": "{{ count }} results"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "404": {
+      "title": "Page Not Found",
+      "subtext": "The page you requested does not exist.",
+      "link": "Continue shopping"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "sale_badge": "Sale",
+      "new_badge": "New",
+      "view_product": "View Product",
+      "shop_now": "Shop Now",
+      "quantity": {
+        "label": "Quantity",
+        "increase": "Increase quantity",
+        "decrease": "Decrease quantity"
+      },
+      "description": "Description",
+      "shipping_returns": "Shipping & Returns",
+      "care_instructions": "Care Instructions",
+      "related_products": "You May Also Like"
+    }
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is currently empty.",
+    "continue_shopping": "Continue Shopping",
+    "subtotal": "Subtotal",
+    "checkout": "Proceed to Checkout",
+    "remove": "Remove",
+    "quantity": "Qty",
+    "note": "Order note",
+    "free_shipping_notice": "Free shipping on orders over $150"
+  },
+  "collections": {
+    "sorting": {
+      "title": "Sort by",
+      "manual": "Featured",
+      "best_selling": "Best Selling",
+      "title_ascending": "A-Z",
+      "title_descending": "Z-A",
+      "price_ascending": "Price: Low to High",
+      "price_descending": "Price: High to Low",
+      "created_descending": "Newest",
+      "created_ascending": "Oldest"
+    },
+    "filters": "Filter",
+    "clear_all": "Clear All",
+    "product_count": "{{ count }} products"
+  },
+  "newsletter": {
+    "label": "Email address",
+    "placeholder": "Email address",
+    "submit": "Subscribe",
+    "success": "Thanks for subscribing!"
+  },
+  "wishlist": {
+    "add": "Add to wishlist",
+    "remove": "Remove from wishlist"
+  }
+}

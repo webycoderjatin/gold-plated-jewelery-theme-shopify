@@ -1,0 +1,29 @@
+<div class="cart-overlay" id="cartOverlay" aria-label="Close cart"></div>
+<div class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
+  <div class="cart-drawer__header">
+    <h2 class="cart-drawer__title" id="cartDrawerTitle">{{ 'cart.title' | t }}</h2>
+    <button class="cart-drawer__close" data-cart-close aria-label="Close cart">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  
+  <div class="cart-drawer__body" id="cartDrawerBody">
+    <!-- Populated by JS -->
+    <div class="cart-drawer__empty">
+      <p>Loading cart...</p>
+    </div>
+  </div>
+  
+  <div class="cart-drawer__footer" id="cartDrawerFooter" hidden>
+    <div class="cart-drawer__subtotal">
+      <span class="cart-drawer__subtotal-label">{{ 'cart.subtotal' | t }}</span>
+      <span class="cart-drawer__subtotal-price" data-cart-subtotal>$0.00</span>
+    </div>
+    <p class="cart-drawer__shipping-note">{{ 'cart.free_shipping_notice' | t }}</p>
+    <form action="{{ routes.cart_url }}" method="post" id="cartDrawerForm">
+      <button type="submit" name="checkout" class="cart-drawer__checkout">
+        {{ 'cart.checkout' | t }}
+      </button>
+    </form>
+  </div>
+</div>

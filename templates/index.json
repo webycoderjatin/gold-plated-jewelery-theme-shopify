@@ -1,0 +1,58 @@
+{
+  "name": "Index",
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "circles": {
+      "type": "collection-circles",
+      "settings": {}
+    },
+    "shop_look": {
+      "type": "shop-the-look",
+      "settings": {}
+    },
+    "editorial_her": {
+      "type": "product-grid",
+      "settings": {
+        "heading": "For Her: The Curated Edit",
+        "show_as_carousel": false,
+        "columns": "4",
+        "products_to_show": 4
+      }
+    },
+    "brand_story": {
+      "type": "brand-story",
+      "settings": {}
+    },
+    "editorial_him": {
+      "type": "product-grid",
+      "settings": {
+        "heading": "For Him: The Curated Edit",
+        "bg_white": true,
+        "show_as_carousel": false,
+        "columns": "4",
+        "products_to_show": 4
+      }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "reels": {
+      "type": "social-stories",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "circles",
+    "shop_look",
+    "editorial_her",
+    "brand_story",
+    "editorial_him",
+    "featured",
+    "reels"
+  ]
+}

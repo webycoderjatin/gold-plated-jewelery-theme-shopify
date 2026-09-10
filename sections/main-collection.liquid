@@ -1,0 +1,123 @@
+<section class="collection-page" style="padding-bottom: var(--sp-20);">
+  {%- if section.settings.show_banner and collection.image -%}
+    <img src="{{ collection.image | image_url: width: 1920 }}" alt="{{ collection.title | escape }}" class="collection-banner">
+  {%- endif -%}
+
+  <div class="container">
+    <div class="collection-header">
+      <h1 class="collection-title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="collection-description">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      <div class="collection-toolbar">
+        <span class="collection-count">{{ 'collections.product_count' | t: count: collection.products_count }}</span>
+        
+        {%- if section.settings.enable_sorting -%}
+          <div class="collection-sort">
+            <label for="SortBy" class="visually-hidden">{{ 'collections.sorting.title' | t }}</label>
+            <select name="sort_by" id="SortBy" aria-describedby="a11y-refresh-page-message" onchange="location = this.value;">
+              {%- for option in collection.sort_options -%}
+                <option value="?sort_by={{ option.value }}" {% if option.value == collection.sort_by %}selected="selected"{% endif %}>
+                  {{ option.name }}
+                </option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if collection.products.size == 0 -%}
+        <div class="text-center" style="padding: var(--sp-16) 0;">
+          <p style="color:var(--color-text-secondary); font-size:14px;">No products found in this collection.</p>
+        </div>
+      {%- else -%}
+        {%- liquid
+          assign columns = section.settings.columns | default: 4
+          assign col_class = 'product-grid--4col'
+          if columns == 3
+            assign col_class = 'product-grid--3col'
+          elsif columns == 2
+            assign col_class = 'product-grid--2col'
+          endif
+        -%}
+        
+        <div class="product-grid {{ col_class }}">
+          {%- for product in collection.products -%}
+            {%- render 'product-card', product: product -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="pagination" role="navigation" aria-label="Pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="pagination__item" aria-label="{{ 'general.pagination.previous' | t }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              </a>
+            {%- endif -%}
+
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}" class="pagination__item">{{ part.title }}</a>
+              {%- else -%}
+                {%- if part.title == paginate.current_page -%}
+                  <span class="pagination__item pagination__item--current" aria-current="page">{{ part.title }}</span>
+                {%- else -%}
+                  <span class="pagination__item" style="border:none;">{{ part.title }}</span>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="pagination__item" aria-label="{{ 'general.pagination.next' | t }}">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection pages",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_banner",
+      "label": "Show collection image as banner",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 16,
+      "label": "Products per page"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Products per row (desktop)",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "Enable sorting",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

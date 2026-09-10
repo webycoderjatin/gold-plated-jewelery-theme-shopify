@@ -1,0 +1,111 @@
+<section class="reels-section{% if section.settings.bg_white %} section--bg-white{% endif %}">
+  <div class="container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="reels-section__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="reels-track-wrap" data-carousel>
+      <button class="reels-nav reels-nav--prev no-scrollbar" data-carousel-prev aria-label="Previous">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div class="reels-track no-scrollbar" data-carousel-track>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'reel' -%}
+            <div class="reel-item" {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 440 }}"
+                  alt="{{ block.settings.caption | default: 'Social story' | escape }}"
+                  loading="lazy"
+                  width="220"
+                  height="390"
+                >
+              {%- else -%}
+                <div style="width:100%;height:100%;background:var(--color-bg-light);"></div>
+              {%- endif -%}
+              {%- if block.settings.caption != blank -%}
+                <div class="reel-item__overlay">
+                  <span class="reel-item__caption">{{ block.settings.caption }}</span>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.link != blank -%}
+                <a href="{{ block.settings.link }}" class="visually-hidden" tabindex="-1" aria-label="{{ block.settings.caption }}">View</a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if section.blocks.size == 0 -%}
+          {%- for i in (1..6) -%}
+            <div class="reel-item skeleton"></div>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      <button class="reels-nav reels-nav--next" data-carousel-next aria-label="Next">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Social Stories",
+  "tag": "section",
+  "class": "section-social-stories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Our Social Stories"
+    },
+    {
+      "type": "checkbox",
+      "id": "bg_white",
+      "label": "Light background",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Story",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social Stories",
+      "settings": {
+        "heading": "Our Social Stories"
+      },
+      "blocks": [
+        { "type": "reel" },
+        { "type": "reel" },
+        { "type": "reel" },
+        { "type": "reel" },
+        { "type": "reel" }
+      ]
+    }
+  ]
+}
+{% endschema %}

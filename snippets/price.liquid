@@ -1,0 +1,18 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign compare_at_price = current_variant.compare_at_price
+  assign price = current_variant.price
+  assign is_on_sale = false
+  if compare_at_price > price
+    assign is_on_sale = true
+  endif
+-%}
+
+<span class="price-component">
+  {%- if is_on_sale -%}
+    <span style="color: var(--color-sale); font-weight: 500;">{{ price | money }}</span>
+    <span style="text-decoration: line-through; color: var(--color-text-secondary); margin-left: 4px; font-size: 0.9em;">{{ compare_at_price | money }}</span>
+  {%- else -%}
+    <span style="font-weight: 500;">{{ price | money }}</span>
+  {%- endif -%}
+</span>

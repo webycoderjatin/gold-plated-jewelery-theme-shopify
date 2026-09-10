@@ -1,0 +1,11 @@
+{
+  "current": {
+    "color_bg": "#EAE6DF",
+    "color_text_primary": "#1A1A1A",
+    "color_text_secondary": "#757575",
+    "color_accent": "#B49D70",
+    "color_border": "#E0DADA",
+    "page_width": 1280
+  },
+  "presets": {}
+}
