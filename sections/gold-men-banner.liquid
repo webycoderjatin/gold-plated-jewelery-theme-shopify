@@ -1,0 +1,30 @@
+<section class="gold-men-banner">
+  {%- if section.settings.image != blank -%}
+    <img src="{{ section.settings.image | image_url: width: 2200 }}" alt="{{ section.settings.heading | escape }}" loading="lazy" width="2200" height="760">
+  {%- else -%}
+    <div class="gold-men-banner__placeholder" aria-hidden="true"></div>
+  {%- endif -%}
+  <div class="gold-men-banner__overlay"></div>
+  <div class="gold-men-banner__content">
+    {%- if section.settings.eyebrow != blank -%}<span class="gold-men-banner__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h2>{{ section.settings.heading }}</h2>
+    {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    {%- if section.settings.button_text != blank -%}<a class="gold-btn gold-btn--light" href="{{ section.settings.button_link | default: routes.collections_url }}">{{ section.settings.button_text }} <span>→</span></a>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gold Men Banner",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Banner image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FOR HIM" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Bold. Refined.\nAlways In Style." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Modern gold plated jewelry for the modern man." },
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "SHOP MEN" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "Gold Men Banner" }]
+}
+{% endschema %}
