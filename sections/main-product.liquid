@@ -1,40 +1,23 @@
 <section class="product-page">
   <div class="container">
     <div class="product-layout">
-      
-      <!-- Media Gallery -->
       <div class="product-gallery">
         <div class="product-gallery__thumbs no-scrollbar">
           {%- for media in product.media -%}
-            <img 
-              src="{{ media | image_url: width: 160 }}" 
-              alt="{{ media.alt | escape }}" 
-              class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}"
-              data-gallery-thumb="{{ media | image_url: width: 1200 }}"
-              width="80" 
-              height="100"
-              loading="lazy"
-            >
+            {%- if media.media_type == 'image' -%}
+              <img src="{{ media | image_url: width: 160 }}" alt="{{ media.alt | escape }}" class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}" data-gallery-thumb="{{ media | image_url: width: 1200 }}" width="80" height="100" loading="lazy">
+            {%- endif -%}
           {%- endfor -%}
         </div>
         <div style="position:relative;">
           {%- if product.featured_media != blank -%}
-            <img 
-              id="productGalleryMain"
-              src="{{ product.featured_media | image_url: width: 1200 }}" 
-              alt="{{ product.featured_media.alt | escape }}" 
-              class="product-gallery__main"
-              width="600" 
-              height="750"
-              loading="eager"
-            >
+            <img id="productGalleryMain" src="{{ product.featured_media | image_url: width: 1200 }}" alt="{{ product.featured_media.alt | escape }}" class="product-gallery__main" width="600" height="750" loading="eager">
           {%- else -%}
             {{ 'product-1' | placeholder_svg_tag: 'product-gallery__main' }}
           {%- endif -%}
         </div>
       </div>
 
-      <!-- Product Info -->
       <div class="product-info">
         <nav class="product-info__breadcrumb">
           <a href="{{ routes.root_url }}">Home</a>
@@ -47,42 +30,32 @@
         </nav>
 
         <h1 class="product-info__title">{{ product.title }}</h1>
-        
+
+        {%- liquid
+          assign current_variant = product.selected_or_first_available_variant
+          assign is_sale = false
+          if current_variant.compare_at_price > current_variant.price
+            assign is_sale = true
+          endif
+        -%}
         <div class="product-info__prices">
-          {%- liquid
-            assign current_variant = product.selected_or_first_available_variant
-            assign is_sale = false
-            if current_variant.compare_at_price > current_variant.price
-              assign is_sale = true
-            endif
-          -%}
-          <span id="productPrice" class="product-info__price{% if is_sale %} product-info__price--sale{% endif %}">
-            {{ current_variant.price | money }}
-          </span>
+          <span id="productPrice" class="product-info__price{% if is_sale %} product-info__price--sale{% endif %}">{{ current_variant.price | money }}</span>
           {%- if is_sale -%}
             <span id="productComparePrice" class="product-info__compare">{{ current_variant.compare_at_price | money }}</span>
             <span class="product-info__sale-badge">{{ 'products.product.sale_badge' | t }}</span>
           {%- endif -%}
         </div>
 
-        <form id="productForm" action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" data-variants='{{ product.variants | json | escape }}'>
-          <input type="hidden" name="id" value="{{ current_variant.id }}">
-          
+        {%- form 'product', product, id: 'productForm', data-variants: product.variants -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+
           {%- unless product.has_only_default_variant -%}
             {%- for option in product.options_with_values -%}
               <div class="product-variant-group">
                 <span class="variant-label">{{ option.name }}</span>
                 <div class="variant-options">
                   {%- for value in option.values -%}
-                    <button 
-                      type="button" 
-                      class="variant-btn{% if option.selected_value == value %} is-selected{% endif %}"
-                      data-variant-btn
-                      data-variant-group="option{{ option.position }}"
-                      data-variant-value="{{ value | escape }}"
-                    >
-                      {{ value }}
-                    </button>
+                    <button type="button" class="variant-btn{% if option.selected_value == value %} is-selected{% endif %}" data-variant-btn data-variant-group="option{{ option.position }}" data-variant-value="{{ value | escape }}">{{ value }}</button>
                   {%- endfor -%}
                 </div>
               </div>
@@ -97,26 +70,15 @@
                 <input type="number" name="quantity" value="1" min="1" class="product-form__qty-input" data-qty-input>
                 <button type="button" class="product-form__qty-btn" data-qty-inc aria-label="{{ 'products.product.quantity.increase' | t }}">+</button>
               </div>
-              <button 
-                type="submit" 
-                class="product-form__atc" 
-                data-atc-btn
-                data-label="{{ 'products.product.add_to_cart' | t }}"
-                {% unless current_variant.available %}disabled{% endunless %}
-              >
-                {%- if current_variant.available -%}
-                  {{ 'products.product.add_to_cart' | t }}
-                {%- else -%}
-                  {{ 'products.product.sold_out' | t }}
-                {%- endif -%}
+              <button type="submit" class="product-form__atc" data-atc-btn data-label="{{ 'products.product.add_to_cart' | t }}" {% unless current_variant.available %}disabled{% endunless %}>
+                {%- if current_variant.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
               </button>
             </div>
-            
             {%- if section.settings.show_dynamic_checkout -%}
               {{ form | payment_button }}
             {%- endif -%}
           </div>
-        </form>
+        {%- endform -%}
 
         <div style="display:flex; gap:var(--sp-6); margin-top:var(--sp-2);">
           <button type="button" class="btn btn-outline" data-wishlist-btn="{{ product.id }}" style="flex:1; border:none; padding:var(--sp-2) 0; font-size:10px; border-bottom:1px solid currentColor;">
@@ -129,26 +91,20 @@
           <div class="accordion-item is-open">
             <button class="accordion-trigger" aria-expanded="true">
               {{ 'products.product.description' | t }}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
             </button>
-            <div class="accordion-content">
-              {{ product.description | default: '<p>Experience luxury craftsmanship with this exquisite piece.</p>' }}
-            </div>
+            <div class="accordion-content">{{ product.description | default: '<p>Experience luxury craftsmanship with this exquisite piece.</p>' }}</div>
           </div>
-          
           {%- if section.settings.shipping_info != blank -%}
-          <div class="accordion-item">
-            <button class="accordion-trigger" aria-expanded="false">
-              {{ 'products.product.shipping_returns' | t }}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="accordion-content">
-              {{ section.settings.shipping_info }}
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                {{ 'products.product.shipping_returns' | t }}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="accordion-content">{{ section.settings.shipping_info }}</div>
             </div>
-          </div>
           {%- endif -%}
         </div>
-
       </div>
     </div>
   </div>
@@ -159,18 +115,8 @@
   "name": "Product Layout",
   "tag": "section",
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "show_dynamic_checkout",
-      "label": "Show dynamic checkout button",
-      "default": true
-    },
-    {
-      "type": "richtext",
-      "id": "shipping_info",
-      "label": "Shipping & Returns Info",
-      "default": "<p>Free shipping on all North American orders over $150. Returns accepted within 14 days of delivery. Custom pieces are non-refundable.</p>"
-    }
+    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Show dynamic checkout button", "default": true },
+    { "type": "richtext", "id": "shipping_info", "label": "Shipping & Returns Info", "default": "<p>Free shipping on all North American orders over $150. Returns accepted within 14 days of delivery. Custom pieces are non-refundable.</p>" }
   ]
 }
 {% endschema %}
