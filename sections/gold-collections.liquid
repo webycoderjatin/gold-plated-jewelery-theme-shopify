@@ -1,75 +1,23 @@
 <section class="gold-collections">
-  <div class="gold-collections__intro">
-    <span class="section-eyebrow">Curated for you</span>
-    <h2 class="section-heading">Find Your Gold</h2>
-    {%- if section.settings.subheading != blank -%}
-      <p class="section-subheading">{{ section.settings.subheading }}</p>
-    {%- endif -%}
-  </div>
-
-  <div class="gold-collections__grid">
-    {%- for block in section.blocks -%}
-      {%- assign collection = block.settings.collection -%}
-      <a href="{%- if collection != blank -%}{{ collection.url }}{%- else -%}{{ routes.collections_url }}{%- endif -%}" class="gold-collection-card" {{ block.shopify_attributes }}>
-        {%- if collection != blank and collection.featured_image != blank -%}
-          <img
-            src="{{ collection.featured_image | image_url: width: 700 }}"
-            alt="{{ collection.title | escape }}"
-            class="gold-collection-card__image"
-            width="700"
-            height="900"
-            loading="lazy"
-          >
-        {%- elsif collection != blank and collection.products.first.featured_image != blank -%}
-          <img
-            src="{{ collection.products.first.featured_image | image_url: width: 700 }}"
-            alt="{{ collection.title | escape }}"
-            class="gold-collection-card__image"
-            width="700"
-            height="900"
-            loading="lazy"
-          >
-        {%- else -%}
-          <div class="gold-collection-card__placeholder" aria-hidden="true"></div>
-        {%- endif -%}
-        <div class="gold-collection-card__overlay" aria-hidden="true"></div>
-        <div class="gold-collection-card__content">
-          <div class="gold-collection-card__eyebrow">Gold Plated Jewelry</div>
-          <h3 class="gold-collection-card__title">{{ block.settings.title | default: collection.title | default: 'Explore Collection' }}</h3>
-        </div>
-      </a>
-    {%- endfor -%}
+  <div class="container">
+    <div class="gold-collections__intro">
+      <div><span class="section-eyebrow">FEATURED COLLECTIONS</span><h2 class="section-heading">Curated for Every Occasion</h2></div>
+      <a class="gold-collections__all" href="{{ routes.collections_url }}">View All Collections <span>→</span></a>
+    </div>
+    <div class="gold-collections__grid">
+      {%- for block in section.blocks -%}
+        {%- assign collection = block.settings.collection -%}
+        <a href="{%- if collection != blank -%}{{ collection.url }}{%- else -%}{{ routes.collections_url }}{%- endif -%}" class="gold-collection-card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}<img src="{{ block.settings.image | image_url: width: 900 }}" alt="{{ block.settings.title | escape }}" class="gold-collection-card__image" width="900" height="560" loading="lazy">
+          {%- elsif collection != blank and collection.featured_image != blank -%}<img src="{{ collection.featured_image | image_url: width: 900 }}" alt="{{ collection.title | escape }}" class="gold-collection-card__image" width="900" height="560" loading="lazy">
+          {%- elsif collection != blank and collection.products.first.featured_image != blank -%}<img src="{{ collection.products.first.featured_image | image_url: width: 900 }}" alt="{{ collection.title | escape }}" class="gold-collection-card__image" width="900" height="560" loading="lazy">
+          {%- else -%}<div class="gold-collection-card__placeholder" aria-hidden="true"></div>{%- endif -%}
+          <div class="gold-collection-card__overlay" aria-hidden="true"></div><div class="gold-collection-card__content"><h3 class="gold-collection-card__title">{{ block.settings.title | default: collection.title | default: 'Explore Collection' }}</h3></div>
+        </a>
+      {%- endfor -%}
+    </div>
   </div>
 </section>
-
 {% schema %}
-{
-  "name": "Gold Jewelry Collections",
-  "tag": "section",
-  "class": "section-gold-collections",
-  "settings": [
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Modern gold-plated pieces for every mood, moment and milestone." }
-  ],
-  "blocks": [
-    {
-      "type": "collection",
-      "name": "Collection",
-      "settings": [
-        { "type": "collection", "id": "collection", "label": "Collection" },
-        { "type": "text", "id": "title", "label": "Display title", "default": "Everyday Essentials" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Gold Jewelry Collections",
-      "blocks": [
-        { "type": "collection", "settings": { "title": "Everyday Essentials" } },
-        { "type": "collection", "settings": { "title": "Wedding & Festive" } },
-        { "type": "collection", "settings": { "title": "Minimal & Modern" } },
-        { "type": "collection", "settings": { "title": "Gift Sets" } }
-      ]
-    }
-  ]
-}
+{"name":"Gold Jewelry Collections","tag":"section","class":"section-gold-collections","settings":[{"type":"text","id":"subheading","label":"Subheading"}],"blocks":[{"type":"collection","name":"Collection","settings":[{"type":"image_picker","id":"image","label":"Image override"},{"type":"collection","id":"collection","label":"Collection"},{"type":"text","id":"title","label":"Display title","default":"Everyday Essentials"}]}],"presets":[{"name":"Gold Jewelry Collections","blocks":[{"type":"collection","settings":{"title":"Everyday Essentials"}},{"type":"collection","settings":{"title":"Wedding & Festive"}},{"type":"collection","settings":{"title":"Minimal & Modern"}},{"type":"collection","settings":{"title":"Gift Sets"}}]}]}
 {% endschema %}
